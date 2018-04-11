@@ -1,4 +1,4 @@
-document.body.backgroundColor = "000000"
+//document.body.backgroundColor = "000000"
     
 // loop through all elements
 var r,g,b;
