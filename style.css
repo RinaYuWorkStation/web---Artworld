@@ -1,0 +1,15 @@
+
+
+
+.colorblock{
+    display:inline-block;
+    margin-right:10px; 
+    width:200px; 
+    height: 350px;
+    }
+
+.align_right{
+   
+    text-align:justify;
+    Padding-left:50px;
+}

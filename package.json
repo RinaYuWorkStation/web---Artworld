@@ -1,0 +1,13 @@
+{
+  "name": "",
+  "version": "",
+  "scripts": {
+    "build": "browserify ./js/script.js -o ./js/bundle.js"
+  },
+  "dependencies": {
+    "browserify": "^16.1.1",
+    "express": "^4.16.3",
+    "jquery": "^3.3.1",
+    "watchify": "^3.11.0"
+  }
+}
