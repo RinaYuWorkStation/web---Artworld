@@ -3,6 +3,7 @@
     <head>
         <meta charset = "utf-8">
 <title>Jackie Yu and Her Website: ArtWorld</title>
+
 <link rel="stylesheet" href="./style.css">
         
     </head>
@@ -16,7 +17,81 @@
 
     <h2> <pre>"ART WORLD"</pre> </h2>
         
+<form onsubmit="return addnewcategory();">
+  red:
+  <input type="text" id="red">
+  green:
+  <input type="text" id="green">
+  blue :
+  <input type="text" id="blue">
+    
+  <input type="submit" value="Submit">
+    
+</form>        
+    
+ <div id = "colors">
   <script src="./js/bundle.js" charset="utf-8"></script>
+        </div>
+        
+
+<!--on submit, create another object-->
+
+<script>
+    
+    function componentToHex(c) {
+    var hex = c.toString(16);
+    return hex.length == 1 ? "0" + hex : hex;
+}
+
+function rgbToHex(r, g, b) {
+    return "#" + componentToHex(r) + componentToHex(g) + componentToHex(b);
+}
+    
+function createElement(hexcolor){
+ 
+var b = document.createElement('b');
+var linkText = document.createTextNode(hexcolor.toString());
+b.appendChild(linkText);
+b.title = hexcolor.toString();
+b.href = "/"+hexcolor;
+b.className = "colorblock"
+
+b.style.backgroundColor = hexcolor.toString();
+
+document.getElementById('colors').appendChild(b);
+
+}
+    
+function addnewcategory(){
+    
+//    
+//    var x = document.createElement("div")
+//    x.innerHTML= "hello"
+//    document.getElementById('colors').appendChild(x)
+//    console.log("test-success")
+//    return false;
+
+var newhex = rgbToHex(parseInt(document.getElementById("red").value),parseInt(document.getElementById("green").value),parseInt(document.getElementById("blue").value))
+
+var x = document.createElement("div")
+var x1 = document.createTextNode("new category added");
+
+x.appendChild(x1);
+
+    
+console.log("success")
+console.log("red",parseInt(document.getElementById("red").value))
+    
+document.getElementById('colors').appendChild(x)
+    
+createElement(newhex);
+    
+return false;
+    }
+    
+    
+        </script>
+
 
     </body>
 </html>

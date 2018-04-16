@@ -40,9 +40,6 @@ function hexToRgb(hex) {
     
 
     
-    
-    
-    
 function createElement(hexcolor){
  
 var a = document.createElement('a');
@@ -57,3 +54,5 @@ a.style.backgroundColor = hexcolor.toString();
 document.body.appendChild(a);
 
 }
+
+
