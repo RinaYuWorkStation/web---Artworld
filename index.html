@@ -17,7 +17,7 @@
 
     <h2> <pre>"ART WORLD"</pre> </h2>
         
-<form onsubmit="return addnewcategory();">
+<!-- <form onsubmit="return addnewcategory();">
   red:
   <input type="text" id="red">
   green:
@@ -27,7 +27,7 @@
     
   <input type="submit" value="Submit">
     
-</form>        
+</form>         -->
     
  <div id = "colors">
   <script src="./js/bundle.js" charset="utf-8"></script>
@@ -36,6 +36,7 @@
 
 <!--on submit, create another object-->
 
+<!-- 
 <script>
     
     function componentToHex(c) {
@@ -90,8 +91,46 @@ return false;
     }
     
     
-        </script>
+        </script> -->
 
+        
+        
+        
+<!--
+        
+s3 post form        
+-->
+        
+<div id = "s3upload">
+        <h1>S3 Upload</h1>
+    
+<form id="s3form" action="http://jackietest.s3.amazonaws.com/" method="post" enctype="multipart/form-data">
+    
+  <input type="hidden" name="key" value="AKIAIQ6JITOO3Q37DQHA"/>
+  <input type="hidden" name="success_action_redirect" value=""/>
+  <input type="hidden" name="Content-Type" value="application/octet-stream"/>
+  <input type="hidden" name="X-Amz-Credential" value=""/>
+  <input type="hidden" name="X-Amz-Algorithm" value="AWS4-HMAC-SHA256"/>
+  <input type="hidden" name="X-Amz-Date" value=""/>
+  <input type="hidden" name="Policy" value=""/>
+  <input type="hidden" name="X-Amz-Signature" value=""/>
+  <p><b>Pick A File: </b>
+    <input id="s3file" name="file" type="file"/>
+  </p>
+  <p>
+    <button id="upload-file">Upload</button>
+  </p>
+</form>
+<script src="./js/jquery.js"></script>
+<script src="./js/upload.js"></script>
+<script>
+  $(function(){
+    Uploader.start();
+  });
+</script>
+        
+        </div>
+        
 
     </body>
 </html>
