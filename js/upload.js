@@ -1,4 +1,6 @@
 
+
+
 var Uploader = (function(){
   var $form, $file;
 
@@ -28,7 +30,7 @@ var Uploader = (function(){
 
   function getUploadCreds(filename, cb){
     $.ajax({
-      type: "post",
+      type: "put",
       url: "/s3creds",
       dataType: "json",
       data: {

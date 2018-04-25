@@ -1,6 +1,4 @@
-//document.body.backgroundColor = "000000"
-    
-// loop through all elements
+
 var r,g,b;
     
     for (r=0;r<=255;r+=75){
@@ -9,9 +7,6 @@ var r,g,b;
                 console.log(r,g,b);
                 let hex = rgbToHex(r,g,b);
                 createElement(""+hex);
-                
-                
-                
             }
         }
     }
@@ -54,5 +49,4 @@ a.style.backgroundColor = hexcolor.toString();
 document.body.appendChild(a);
 
 }
-
 

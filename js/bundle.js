@@ -2,6 +2,8 @@
 //document.body.backgroundColor = "000000"
     
 // loop through all elements
+//require('jquery')
+
 var r,g,b;
     
     for (r=0;r<=255;r+=75){
@@ -41,9 +43,6 @@ function hexToRgb(hex) {
     
 
     
-    
-    
-    
 function createElement(hexcolor){
  
 var a = document.createElement('a');
@@ -59,8 +58,12 @@ document.body.appendChild(a);
 
 }
 
+
+
 },{}],2:[function(require,module,exports){
 require('./mainDisplay.js');
+//require('./jquery.js');
+//require('./upload.js');
 
 
 },{"./mainDisplay.js":1}]},{},[2]);

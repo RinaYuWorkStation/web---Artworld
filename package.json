@@ -8,11 +8,14 @@
   "dependencies": {
     "body-parser": "^1.18.2",
     "browserify": "^16.1.1",
+    "clarifai": "^2.7.1",
     "cookie-parser": "^1.4.3",
     "epa": "^0.2.1",
     "express": "^4.16.3",
     "jquery": "^3.3.1",
     "moment": "^2.22.1",
+    "mongoose": "^5.0.16",
+    "mongoose-url-slugs": "^1.0.2",
     "morgan": "^1.9.0",
     "s3-post-policy": "^2.3.0",
     "watchify": "^3.11.0"

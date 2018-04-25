@@ -101,10 +101,29 @@ return false;
 s3 post form        
 -->
         
-<div id = "s3upload">
-        <h1>S3 Upload</h1>
+<!--
+<div id = "mongodbupload">
+    <h1>
     
-<form id="s3form" action="http://jackietest.s3.amazonaws.com/" method="post" enctype="multipart/form-data">
+        </div>
+-->
+        
+        
+        <div id  = "mongoupload">
+            
+            <form method="POST" action="">
+url: <input type="string" id="url" name="url" ><br>
+Select a file: <input type="file" id="myfile" name="myfile" ><br>
+<input type="submit" value="submit">	
+</form>
+            
+        </div>
+        
+        
+<div id = "s3upload">
+        <h1>S3 Upload : working on local, not working on deployed, some CORS issue</h1>
+    
+<form id="s3form" action="http://jackieyu0.s3.amazonaws.com/" method="put" enctype="multipart/form-data">
     
   <input type="hidden" name="key" value="AKIAIQ6JITOO3Q37DQHA"/>
   <input type="hidden" name="success_action_redirect" value=""/>
@@ -120,9 +139,11 @@ s3 post form
   <p>
     <button id="upload-file">Upload</button>
   </p>
+  
 </form>
 <script src="./js/jquery.js"></script>
 <script src="./js/upload.js"></script>
+    <link rel="shortcut icon" href="#" />
 <script>
   $(function(){
     Uploader.start();

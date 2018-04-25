@@ -8,6 +8,8 @@ var moment = require("moment");
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var logger = require('morgan');
+var mongoose = require('mongoose')
+require('./js/db.js')
 
 // //didn't have this
 // var path = require('path');
@@ -23,6 +25,11 @@ app.use(cookieParser());
 app.get('/', function(req,res){
 
 res.sendFile(__dirname + '/index.html')
+})
+
+app.get('/done', function(req,res){
+
+res.sendFile(__dirname + '/done.html')
 })
 
 app.get('/js/script.js',function(req,res){
@@ -56,13 +63,34 @@ app.get('/js/bundle.js',function(req,res){
 })
 
 
+const Object = mongoose.model('Object');
 
-app.post("/s3creds", function(req, res, next){
+app.post('/',function(req,res){
+      var newObject = new Object({
+        objectname:req.body.url,
+        artist:"testartist2",
+        thishex:"#000002",
+        stdhex:"#000000"
+    });
+    
+//    console.log(newObject)
+      
+     newObject.save(function(err){
+        if(err){throw err}
+         console.log("save");
+         console.log(newObject)
+    })
+    
+    res.redirect('/done');
+})
+
+
+app.put("/s3creds", function(req, res, next){
+    
   var filename = req.body.filename;
   var expires = moment().add(120, "minutes").toISOString();
   var contentType = "application/octet-stream";
-var folder = "somefolder"
-
+  var folder = "somefolder"
   var policyConfig = {
     id: s3Config.key,
     secret: s3Config.secret,
@@ -79,16 +107,14 @@ var folder = "somefolder"
       ]
     }
   };
-
+    
   var policy = s3PostPolicy(policyConfig);
   console.log(policy);
   res.json(policy.fields);
-    
   var text = document.createTextNode("Upload Success!")    
   document.getElementById("s3upload").appendChild(text);
     
-    
 });
 
-
 app.listen(3000);
+//app.listen(3000);
