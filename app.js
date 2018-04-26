@@ -85,12 +85,13 @@ app.post('/',function(req,res){
 })
 
 
-app.put("/s3creds", function(req, res, next){
+app.post("/s3creds", function(req, res, next){
     
   var filename = req.body.filename;
   var expires = moment().add(120, "minutes").toISOString();
   var contentType = "application/octet-stream";
   var folder = "somefolder"
+  
   var policyConfig = {
     id: s3Config.key,
     secret: s3Config.secret,
@@ -111,8 +112,9 @@ app.put("/s3creds", function(req, res, next){
   var policy = s3PostPolicy(policyConfig);
   console.log(policy);
   res.json(policy.fields);
-  var text = document.createTextNode("Upload Success!")    
-  document.getElementById("s3upload").appendChild(text);
+    
+//  var text = document.createTextNode("Upload Success!")    
+//  document.getElementById("s3upload").appendChild(text);
     
 });
 

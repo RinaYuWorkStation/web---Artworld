@@ -1,6 +1,6 @@
 {
   "s3": {
-    "bucket":"jackieyu0.com",
+    "bucket":"jackietest",
     "region":"us-east-1",
     "key":"AKIAIQ6JITOO3Q37DQHA",
     "secret":"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",

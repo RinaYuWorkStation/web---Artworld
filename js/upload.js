@@ -7,6 +7,7 @@ var Uploader = (function(){
   function start(){
       console.log("uploader start")
     $form = $("#s3form");
+      console.log($form)
     $file = $("#s3file");
 
     $("#upload-file").click(function(e){
@@ -30,7 +31,7 @@ var Uploader = (function(){
 
   function getUploadCreds(filename, cb){
     $.ajax({
-      type: "put",
+      type: "post",
       url: "/s3creds",
       dataType: "json",
       data: {
