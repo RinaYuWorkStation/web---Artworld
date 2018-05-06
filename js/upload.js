@@ -1,3 +1,5 @@
+//from WatchMeCode
+// https://github.com/watchmecode/aws-s3-http-post
 
 
 
@@ -7,7 +9,7 @@ var Uploader = (function(){
   function start(){
       console.log("uploader start")
     $form = $("#s3form");
-      console.log($form)
+     // console.log($form)
     $file = $("#s3file");
 
     $("#upload-file").click(function(e){
@@ -19,17 +21,24 @@ var Uploader = (function(){
   }
   
   function handlUpload(cb){
+      console.log("hanlupload")
     var filename = $file[0].files[0].name;
 
     getUploadCreds(filename, function(err, creds){
-      console.log(creds);
+    
+    //  console.log(creds);
       if (err) { return cb(err); }
       setFormData(creds);
       $form.submit();
+        
+//        var color = require('/.color.js');
+//     
+        
     });
   }
 
   function getUploadCreds(filename, cb){
+//        console.log("getuploadcreds")
     $.ajax({
       type: "post",
       url: "/s3creds",
@@ -42,11 +51,12 @@ var Uploader = (function(){
       },
       error: cb
     });
-  }
+}
 
   function setFormData(creds){
+
       console.log('setformdata')
-      console.log(creds)
+//      console.log(creds)
     $form.prop("target", creds.s3Url);
     $("input[name='key']").val(creds.key);
     $("input[name='X-Amz-Signature']").val(creds["x-amz-signature"]);

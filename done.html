@@ -4,11 +4,38 @@
         <meta charset = "utf-8">
 <title>Jackie Yu and Her Website: ArtWorld</title>
 
+        
+<link rel="stylesheet" href="./style.css">
+        
     </head>
     
     
     <body>
         
- upload to mongodb done
+ upload to mongodb done<br>
+        
+ Your image is in category <br>
+        
+        
+<script>
+    
+let hexcolor = "#e1e1e1"
+    
+var a = document.createElement('a');
+var linkText = document.createTextNode(hexcolor.toString());
+    
+a.appendChild(linkText);
+a.title = hexcolor.toString();
+    let routename = hexcolor.substring(1);
+    console.log(routename)
+    
+a.href = "/"+routename;
+a.className = "colorblock"
+
+a.style.backgroundColor = hexcolor.toString();
+
+document.body.appendChild(a);
+    
+        </script>
         
     </body>

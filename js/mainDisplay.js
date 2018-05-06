@@ -4,7 +4,7 @@ var r,g,b;
     for (r=0;r<=255;r+=75){
         for(g=0;g<=255;g+=75){
             for(b=0;b<=255;b+=75){
-                console.log(r,g,b);
+               // console.log(r,g,b);
                 let hex = rgbToHex(r,g,b);
                 createElement(""+hex);
             }
@@ -39,9 +39,13 @@ function createElement(hexcolor){
  
 var a = document.createElement('a');
 var linkText = document.createTextNode(hexcolor.toString());
+    
 a.appendChild(linkText);
 a.title = hexcolor.toString();
-a.href = "/"+hexcolor;
+    let routename = hexcolor.substring(1);
+    console.log(routename)
+    
+a.href = "/"+routename;
 a.className = "colorblock"
 
 a.style.backgroundColor = hexcolor.toString();

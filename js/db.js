@@ -12,12 +12,9 @@ var ObjectSchema = new mongoose.Schema({
     objectname:{type:String, required: true},
     artist:{type:String},
     thishex:{type:String},
-    stdhex:{type:String}
-    
-//    postedBy:{
-//        type:mongoose.Schema.Types.ObjectId,
-//        ref:"User"
-//    }
+    stdhex:{type:String},
+    date:{type:String}
+ 
 });
 
 ObjectSchema.plugin(URLSlugs('objectname'));
@@ -28,15 +25,6 @@ const Object = mongoose.model('Object',ObjectSchema);
 
 mongoose.connect('mongodb://localhost/artworld')
 
-//mongoose.connect('mongodb://localhost/artworld', (err, database) => {
-//  if (err) {
-//    return console.log(err);
-//  } else {
-//    console.log('Connected to database'); 
-//
-//      
-//  }
-//});
 
 
-module.exports = Object;
+module.exports = {User,Object};

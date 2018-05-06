@@ -13,3 +13,31 @@
     text-align:justify;
     Padding-left:50px;
 }
+
+.boundary{
+ 
+     border-style : dotted;
+    width : 500px;
+    height:150px;
+}
+
+.uploader{
+
+    border-style : dotted;
+    display: inline-block;
+    width : 200px;
+    height:350px;
+  vertical-align:top; 
+
+}
+
+.flex-container {
+  display: flex;
+}
+
+
+.imageblock{
+    display:inline-block;
+    margin-right:10px; 
+
+    }

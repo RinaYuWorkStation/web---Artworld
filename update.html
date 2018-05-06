@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset = "utf-8">
+<title>Jackie Yu and Her Website: ArtWorld</title>
+        
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<!-- <script src="./js/db.js"></script>-->
+<link rel="stylesheet" href="./style.css">
+  
+</head>
+    
+    
+<body>
+        
+        
+<h1>Today's update</h1>
+        
+<div id="testbtn">
+    
+     <form id="testform" action="" method="post">
+<!--    <input id = "testtextfield" type="text" name="thistext" value ="reservedParam"/>-->
+     <input id = "hiddenurl" type="hidden" name="thisurl" value ="empty"/>
+<!--     <input type="submit" value="submit">	-->
+     </form>
+            
+    
+    <script>
+        
+//         document.querySelector("#testtextfield").onchange=function(){
+//             console.log("test text field on change worked")
+////              document.querySelector("#testform").submit()
+//        }
+        
+        document.querySelector("#hiddenurl").onchange=function(){
+            console.log(" hiddenurl onchange worked")
+              document.querySelector("#testform").submit()
+        }
+        
+         document.querySelector("#testform").onsubmit=function(){
+             console.log("form submitted")
+         }
+      
+    </script>
+</div>
+    
+    <button  id="testbutton" value="test">Can't wait, update now</button>
+
+
+    
+<!--db.collection.find().sort({ $natural: -1 }).limit(N)    -->
+<!--
+    function last(N) {
+    return db.collection.find().skip(db.collection.count() - N);
+}
+-->
+<div class="flex-container" id="hourlyimages">
+<!--    http://farm1.staticflickr.com/943/41879557021_1bc8608425_b.jpg-->
+    <img class="imageblock" id="img1" src="" /> <img class="imageblock" id="img2" src="" /> <img class="imageblock" id="img3" src="" /> <img class="imageblock" id="img4" src="" /> <img class="imageblock" id="img5" src="" />
+   
+</div>
+
+<!--    <script src="./js/b-showrecent.js"></script>-->
+        
+<script>
+//this is an hour, goal is a day
+var intervalID = window.setInterval(execute,3600000*24)
+
+//const Object = mongoose.model('Object');
+
+
+
+document.querySelector("#testbutton").onclick=execute;    
+    
+function execute(){
+   console.log("execute")
+    extractArtUrl("oil art",1)
+      extractArtUrl("oil painting",2)
+      extractArtUrl("oilpaint",3)
+      extractArtUrl("oil drawing",4)
+      extractArtUrl("painting",5)
+}
+    
+//85
+function extractArtUrl(keyword,i){
+
+    $(document).ready(function(){
+//        
+        
+        $.getJSON("http://api.flickr.com/services/feeds/photos_public.gne?jsoncallback=?",
+        {
+            tags: keyword,
+            tagmode: "any",
+            format: "json"
+        },
+                  
+        function(data) {
+           //get small div change image src
+           // console.log(data)
+            var rnd = Math.floor(Math.random() * data.items.length);
+            var image_src = data.items[rnd]['media']['m'].replace("_m", "_b");
+
+//          console.log("newURL:")
+//            
+//          console.log(image_src)
+//            // put url in request 
+//            
+       let imgs = document.getElementsByClassName("imageblock")
+       //console.log(imgs)
+       console.log("i",i);
+       let img = document.getElementById("img"+i)
+       
+       img.src = image_src;  
+            
+          //trigger on change    , should be 
+       document.querySelector("#hiddenurl").value = image_src;
+//       console.log("document.querySelector('#hiddenurl').value")
+//       console.log(document.querySelector("#hiddenurl").value)
+//       document.querySelector("#testtextfield").value = image_src;
+       $('#hiddenurl').change()     
+        });
+    
+    });
+  }
+    
+</script>
+    
+    </body>
+</html>

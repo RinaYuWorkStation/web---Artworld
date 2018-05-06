@@ -1,7 +1,7 @@
 
 //color recognition
-let mongoose = require('mongoose')
-require('./db')
+//let mongoose = require('mongoose')
+//require('./db')
 
 const Clarifai = require('clarifai');
 //require('./mainDisplay.js')
@@ -24,6 +24,9 @@ function rgbToHex(r, g, b) {
     return "#" + componentToHex(r) + componentToHex(g) + componentToHex(b);
 }
 
+//above 3 functions from
+//https://stackoverflow.com/questions/5623838/rgb-to-hex-and-hex-to-rgb
+
 var currentColorHex;
 var currentColorName;
 
@@ -32,8 +35,14 @@ const app = new Clarifai.App({
 });
 
 function analyzeColor(filename,callback){
+ 
     let result = undefined;
-    app.models.predict("eeed0b6733a644cea07cf4c60f87ebb7", filename).then(
+    
+//    const app = new Clarifai.App({
+// apiKey: 'd8e913a9f8c44182bd71386557829b5b'
+//});
+    
+app.models.predict("eeed0b6733a644cea07cf4c60f87ebb7", filename).then(
         
     function(response) {
         let rawColorArray = response["outputs"][0]["data"]["colors"];
@@ -59,6 +68,7 @@ sortedHex.sort(function(first, second) {
 });
        
     //return the largest potion color 
+     
    return callback(sortedHex[0][0]);
         
     },
@@ -71,9 +81,7 @@ sortedHex.sort(function(first, second) {
 }
 
 
-//compare with current selection of color;
-
-
+//85
 function findColorCategory(myrgb){
     let myred = myrgb.r;
     let mygreen = myrgb.g;
@@ -84,11 +92,6 @@ function findColorCategory(myrgb){
     let r;
     let g;
     let b;
-    
-//    
-//    console.log(myred)
-//    console.log(mygreen);
-//    console.log(myblue)
     
 for(r=0;r<255;r+=75){
     if(r>=myred){
@@ -121,10 +124,7 @@ for(r=0;r<255;r+=75){
         break;
     }
 }
-//
-//    console.log(truered)
-//    console.log(truegreen);
-//    console.log(trueblue)
+
     
     let truehex = rgbToHex(truered,truegreen,trueblue);
     return(truehex);
@@ -134,45 +134,17 @@ for(r=0;r<255;r+=75){
 }
 var testfile ="https://samples.clarifai.com/metro-north.jpg"
 
-//const User = mongoose.model('User');
-const Object = mongoose.model('Object');
 
-//console.log(Object)
-
-
-
-
-analyzeColor(testfile,function(response){
-  console.log("above is correct")
+module.exports = {
+    findColorCategory:findColorCategory,
+    componentToHex: componentToHex,
+    hexToRgb:hexToRgb,
+    rgbToHex:rgbToHex,
+    analyzeColor:analyzeColor,
+    app:app
     
-    let currentColorHex=response;
-    let myrgb = hexToRgb(currentColorHex);
-    let colorcollection = findColorCategory(myrgb);
-    let artistname = "na"
     
- 
-   console.log(currentColorHex);
-    
-//       
-//      var newObject = new Object({
-//        objectname:"test2",
-//        artist:"testartist2",
-//        hex:"#00002"
-//    });
-//    
-////    console.log(newObject)
-//      
-//     newObject.save(function(err){
-//        if(err){throw err}
-//         console.log("save");
-//         console.log(newObject)
-//    })
-    
-});
-
-
-
-
+}
 
     
  

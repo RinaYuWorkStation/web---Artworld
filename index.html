@@ -1,130 +1,52 @@
 <!DOCTYPE html>
 <html>
-    <head>
+<head>
         <meta charset = "utf-8">
 <title>Jackie Yu and Her Website: ArtWorld</title>
 
-<link rel="stylesheet" href="./style.css">
+<script type="text/javascript">
+ let myfilename = ""
+    
+</script>
+
         
-    </head>
+<link rel="stylesheet" href="./style.css">
+  
+</head>
     <body>
 
     
-    <div align = "right">
-        <pre>  Jackie Yu and Her Website </pre>
-    </div>
+<div align = "right">
+        <pre> <a href="/update" >update</a> | Jackie Yu and Her Website </pre>
+</div>
 
-
-    <h2> <pre>"ART WORLD"</pre> </h2>
-        
-<!-- <form onsubmit="return addnewcategory();">
-  red:
-  <input type="text" id="red">
-  green:
-  <input type="text" id="green">
-  blue :
-  <input type="text" id="blue">
-    
-  <input type="submit" value="Submit">
-    
-</form>         -->
-    
- <div id = "colors">
-  <script src="./js/bundle.js" charset="utf-8"></script>
-        </div>
-        
-
-<!--on submit, create another object-->
-
-<!-- 
-<script>
-    
-    function componentToHex(c) {
-    var hex = c.toString(16);
-    return hex.length == 1 ? "0" + hex : hex;
-}
-
-function rgbToHex(r, g, b) {
-    return "#" + componentToHex(r) + componentToHex(g) + componentToHex(b);
-}
-    
-function createElement(hexcolor){
- 
-var b = document.createElement('b');
-var linkText = document.createTextNode(hexcolor.toString());
-b.appendChild(linkText);
-b.title = hexcolor.toString();
-b.href = "/"+hexcolor;
-b.className = "colorblock"
-
-b.style.backgroundColor = hexcolor.toString();
-
-document.getElementById('colors').appendChild(b);
-
-}
-    
-function addnewcategory(){
-    
-//    
-//    var x = document.createElement("div")
-//    x.innerHTML= "hello"
-//    document.getElementById('colors').appendChild(x)
-//    console.log("test-success")
-//    return false;
-
-var newhex = rgbToHex(parseInt(document.getElementById("red").value),parseInt(document.getElementById("green").value),parseInt(document.getElementById("blue").value))
-
-var x = document.createElement("div")
-var x1 = document.createTextNode("new category added");
-
-x.appendChild(x1);
-
-    
-console.log("success")
-console.log("red",parseInt(document.getElementById("red").value))
-    
-document.getElementById('colors').appendChild(x)
-    
-createElement(newhex);
-    
-return false;
-    }
-    
-    
-        </script> -->
-
+<div>
+<h2> <pre>"ART WORLD"</pre> </h2>
+</div>
         
         
+<div id = "colors">
+<script src="./js/bundle.js" charset="utf-8"></script>
+</div>
         
-<!--
+<!--upload section        -->
+<div id = "upload">
         
-s3 post form        
--->
-        
-<!--
-<div id = "mongodbupload">
-    <h1>
-    
-        </div>
--->
-        
-        
-        <div id  = "mongoupload">
+<!--upload from url    -->
+<div  class = "uploader" id = "url upload">
             
-            <form method="POST" action="">
+<form method="POST" action="">
+    
 url: <input type="string" id="url" name="url" ><br>
-Select a file: <input type="file" id="myfile" name="myfile" ><br>
 <input type="submit" value="submit">	
 </form>
-            
+    
         </div>
-        
-        
-<div id = "s3upload">
-        <h1>S3 Upload : working on local, not working on deployed, some CORS issue</h1>
-    
-    
-<form id="s3form" action="http://jackietest.s3.amazonaws.com/" method="post" enctype="multipart/form-data">
+
+<!--upload from local file      -->
+<div  class = "uploader" id = "local upload">
+
+<form id="s3form" action="http://jackietest.s3.amazonaws.com/" method="post" enctype="multipart/form-data" >
     
   <input type="hidden" name="key" value="AKIAIQ6JITOO3Q37DQHA"/>
   <input type="hidden" name="success_action_redirect" value=""/>
@@ -134,29 +56,53 @@ Select a file: <input type="file" id="myfile" name="myfile" ><br>
   <input type="hidden" name="X-Amz-Date" value=""/>
   <input type="hidden" name="Policy" value=""/>
   <input type="hidden" name="X-Amz-Signature" value=""/>
-  <p><b>Pick A File: </b>
+ 
     <input id="s3file" name="file" type="file"/>
-  </p>
+
   <p>
-    <button id="upload-file">Upload</button>
+    <button id="upload-file">Upload to s3</button>
   </p>
   
 </form>
 <script src="./js/jquery.js"></script>
-
 <script src="./js/upload.js"></script>
-<!--    try browserify this -->
-    
-    
-    <link rel="shortcut icon" href="#" />
+
+<!--    <link rel="shortcut icon" href="#" />-->
 <script>
+  
+// here and the uploader.js are from WatchMeCode, github:https://github.com/watchmecode/aws-s3-http-post
   $(function(){
     Uploader.start();
   });
 </script>
         
-        </div>
+    <div id="analyzediv">
+        
+        
+        
+<form id="analyzeform" action="/s3analyze" method="post">
+    
+  
+     <input id = "hiddenfilename" type="hidden" name="file_name" value ="empty"/>
+    <button id = "analyze-file" > analyze </button>
+        </form>
+        
+  <script>
+      document.querySelector("#s3file").onchange = function(){
+        let filename = document.querySelector("#s3file").files[0].name;
+        document.querySelector("#hiddenfilename").value = filename 
+          console.log("document.querySelector('hiddenfilename').value")
+          console.log(document.querySelector("#hiddenfilename").value)
+      }
+      
+        </script>
+    
+    </div>
+  </div>
+</div> 
         
 
+        
+        <b>for learning purpose, not commercial use. </b>
     </body>
 </html>
