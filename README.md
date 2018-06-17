@@ -10,6 +10,10 @@ main page
 upload section
 ![Image of upload](./uploadsection.jpeg)
 
+upload success
+![Image of uploadsuccess](./uploaddemo.jpg)
+
+
 update section
 ![Image of update](./update_today.jpeg)
 
