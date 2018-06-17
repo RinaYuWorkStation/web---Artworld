@@ -13,14 +13,12 @@ var db = require('./js/db.js')
 var color = require('./js/color.js')
 var fs = require('fs')
 
+const path = require('path');
+app.use(express.static(__dirname));
+
 var lasthex="default";
 //var lastfive=[]
 var testglobalvariable = "testtest"
-
-// //didn't have this
-// var path = require('path');
-// app.set('views', path.join(__dirname, 'views'));
-// app.set('view engine', 'jade');
 
 app.use(logger('dev'));
 app.use(bodyParser.json());
@@ -29,45 +27,51 @@ app.use(cookieParser());
 
 const Object = mongoose.model('Object');
 
-
-//main page
-app.get('/', function(req,res){
-res.sendFile(__dirname + '/index.html')
+app.get('/test',function(req,res){
+    
 })
 
 
-
-//find today's update
+//find last 5 in database
 app.get('/update', function(req,res){
-// db find latest
-Object.find({"date":Math.floor((new Date()).getTime() / (24 * 3600 * 1000))},function(err,objects,count){
-//fetch html data and async call
-let data = fs.readFileSync('update.html')
-console.log(data)
-if(data){
-   logfile(data,objects)}
-else{ 
-    console.log('na')
-}
- })
+
+
+let updatehtml = fs.readFileSync('update.html').toString();
+//res.send(updatehtml);
+    //
+let lastObjects;
+Object.find(function(err,objects,count){
+    //fetch html data and async call
+    if(objects){
+        lastObjects = objects.reverse().slice(0,5)
+        logfile(updatehtml,lastObjects);
+    }
+
+    else{ 
+        res.send('error on finding todays images');
+    }
+ 
+})
+
     
 // async change data and send   
 function logfile(content,objects){
 
-//console.log(objects)
-        
-let originalstr = '<img class="imageblock" id="img1" src="" /> <img class="imageblock" id="img2" src="" /> <img class="imageblock" id="img3" src="" /> <img class="imageblock" id="img4" src="" /> <img class="imageblock" id="img5" src="" />'
-        
-let modifiedstr = '<img class="imageblock" id="img1" src='+objects[0].objectname +' />  <img class="imageblock" id="img2" src='+objects[1].objectname +' />  <img class="imageblock" id="img3" src='+objects[2].objectname +' />  <img class="imageblock" id="img4" src='+objects[3].objectname +' />  <img class="imageblock" id="img5" src='+objects[4].objectname +' />'
-            
-            
-let modifiedhtml = content.toString().replace(originalstr,modifiedstr)
-res.send("<html>"+modifiedhtml+"</html>")
-     
-    }
-    
-})
+let urlarray = []
+let a=0;
+for(a=0;a<5;a++){
+    urlarray.push(objects[a].objectname)
+}
 
+let src1 = urlarray[0];
+
+let modifiedstr='<script>let imgs=document.getElementsByClassName("imageblock");imgs[0].src= "'+src1+'";imgs[1].src= "'+urlarray[1]+'";imgs[2].src= "'+urlarray[2]+'";imgs[3].src= "'+urlarray[3]+'";imgs[4].src= "'+urlarray[4]+'";</script>';
+     
+let modifiedhtml = content.toString().replace("nothingparam",modifiedstr);
+res.send(modifiedhtml);
+   
+}
+})
 
 //auto update engine
 app.post('/update', function(req,res){
@@ -77,7 +81,7 @@ console.log(myurl)
     
 var thishex, thisrgb,stdhex;
 
- color.analyzeColor(myurl,function(response){
+color.analyzeColor(myurl,function(response){
         console.log('upload from auto update file analyze color');
          thishex = response;
          thisrgb = color.hexToRgb(thishex);
@@ -95,47 +99,14 @@ var thishex, thisrgb,stdhex;
       
      newObject.save(function(err){
         if(err){throw err}
-         console.log("save");
+         console.log("save to mongodb success");
          console.log(newObject)
     })
-        
     })
-//    res.send('updated');
+   res.redirect('/update');
 
 })
 
-app.get('/js/script.js',function(req,res){
-    res.sendFile(__dirname + '/js/script.js')
-})
-
-app.get('/style.css',function(req,res){
-    res.sendFile(__dirname + '/style.css')
-})
-
-app.get('/js/db.js',function(req,res){
-    res.sendFile(__dirname + '/js/db.js')
-})
-
-app.get('/js/jquery.js',function(req,res){
-    res.sendFile(__dirname + '/js/jquery.js')
-})
-
-app.get('/js/mainDisplay.js',function(req,res){
-    res.sendFile(__dirname + '/js/mainDisplay.js')
-})
-
-app.get('/js/upload.js',function(req,res){
-    res.sendFile(__dirname + '/js/upload.js')
-})
-
-app.get('/js/color.js',function(req,res){
-    res.sendFile(__dirname + '/js/color.js')
-})
-
-app.get('/js/bundle.js',function(req,res){
-
-    res.sendFile(__dirname + '/js/bundle.js')
-})
 
 
 

@@ -1,11 +1,19 @@
-# jy1604-final-project
-final-project created for jy1604
+ArtWorld 
 
-website: jackieyu0.com
+http://ec2-35-174-113-24.compute-1.amazonaws.com:9000/
 
-force commit is ruining readme everytime, my apology, I'll rewrite it before final submit
+ArtWorld is a online gallery project that arose from Jackie's passion for Art. It features AI image recoginition to classify artwork by colors, user upload and daily auto upload from images fetched online. 
 
-milestone 2 -> 3
-1. s3 upload (very close, works on local machine, not on deployed, asking for aws help)
-2. save to mongoose database
-# jackieyu0
+main page
+![Image of main](./main.jpeg)
+
+upload section
+![Image of upload](./uploadsection.jpeg)
+
+update section
+![Image of update](./update_today.jpeg)
+
+thanks to:
+Clarifai api
+watchmecode on s3httppost
+
