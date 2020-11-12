@@ -1,6 +1,6 @@
 ArtWorld 
 
-http://ec2-35-174-113-24.compute-1.amazonaws.com:9000/
+This application is no longer hosted on EC2, local run only
 
 ArtWorld is a online gallery project that arose from Jackie's passion for Art. It features AI image recoginition to classify artwork by colors, user upload and daily auto upload from images fetched online. 
 
