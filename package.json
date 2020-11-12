@@ -15,7 +15,7 @@
     "fs": "0.0.1-security",
     "jquery": "^3.3.1",
     "moment": "^2.22.1",
-    "mongoose": "^5.0.16",
+    "mongoose": "^5.7.5",
     "mongoose-url-slugs": "^1.0.2",
     "morgan": "^1.9.0",
     "s3-post-policy": "^2.3.0",
